@@ -142,7 +142,7 @@ Para testar a câmera e o GPS real:
 
 ---
 
-
-Desenvolvido com 💙 para o Hackathon GDF.
-
+<div align="center">
+<sub>Desenvolvido com 💙 para o Hackathon GDF.</sub>
+</div>
 
