@@ -1,0 +1,12 @@
+{
+    "protocolo": "50789D74",
+    "data_criacao": "25/01/2026 15:40",
+    "tipo_ocorrencia": "buraco",
+    "descricao": "Buraco na pista",
+    "localizacao": {
+        "lat": -15.918910229747558,
+        "lng": -48.09849103527135
+    },
+    "identificacao": "Identificado",
+    "anexo": "uploads/50789D74.jpg"
+}

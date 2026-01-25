@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#003399">
+    <title>Participa DF Lite</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📣</text></svg>">
+    <link rel="stylesheet" href="libs/leaflet.css"/>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <button id="btn-acc-toggle" onclick="toggleAccPanel()" aria-label="Acessibilidade">
+        <svg viewBox="0 0 24 24" width="28" height="28" fill="white"><path d="M12 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm9 7h-6v13h-2v-6h-2v6H9V9H3V7h18v2z"/></svg>
+    </button>
+
+    <div id="acc-panel" class="acc-panel hidden">
+        <div class="acc-header"><span>Acessibilidade</span><button onclick="toggleAccPanel()" class="btn-close-acc">✕</button></div>
+        <div class="acc-content">
+            <div class="acc-group"><label>Visual</label><div class="acc-grid">
+                <button onclick="toggleContrast()" class="acc-btn"><span class="icon">◑</span> <span>Contraste</span></button>
+                <button onclick="toggleMonochrome()" class="acc-btn"><span class="icon">⚫</span> <span>Monocromático</span></button>
+                <button onclick="toggleSaturation()" class="acc-btn"><span class="icon">💧</span> <span>Saturação</span></button>
+                <button onclick="toggleReadingGuide()" class="acc-btn"><span class="icon">📏</span> <span>Régua</span></button>
+            </div></div>
+            <div class="acc-group"><label>Texto</label><div class="acc-grid">
+                <button onclick="changeFontSize(1)" class="acc-btn"><span class="icon">A+</span> <span>Aumentar</span></button>
+                <button onclick="changeFontSize(-1)" class="acc-btn"><span class="icon">A-</span> <span>Diminuir</span></button>
+                <button onclick="toggleDyslexia()" class="acc-btn"><span class="icon">🤓</span> <span>Dislexia</span></button>
+                <button onclick="toggleSpacing()" class="acc-btn"><span class="icon">↔️</span> <span>Espaço</span></button>
+            </div></div>
+            <div class="acc-group"><label>Navegação</label><div class="acc-grid">
+                <button onclick="toggleCursor()" class="acc-btn"><span class="icon">👆</span> <span>Cursor</span></button>
+                <button onclick="highlightLinks()" class="acc-btn"><span class="icon">🔗</span> <span>Links</span></button>
+            </div></div>
+            <button onclick="resetAccessibility()" class="btn-reset-acc">Restaurar Padrões</button>
+        </div>
+    </div>
+    <div id="reading-guide-bar" class="reading-guide hidden"></div>
+
+    <div id="intro-view" class="view active">
+        <div class="gdf-header-bar"><div class="gdf-logo-text">GDF | Ouvidoria 162</div></div>
+        <div class="intro-scroll-container">
+            <div class="intro-content-wrapper">
+                <div class="logo-area">
+                    <div class="logo-circle">📣</div>
+                    <h1>Participa DF <span style="color:#FFCC00">Lite</span></h1>
+                    <p>Ouvidoria Cidadã Inteligente</p>
+                </div>
+                <div class="steps-card">
+                    <h3>Como funciona?</h3>
+                    <div class="step-item"><span class="step-icon">📍</span><div class="step-text"><strong>Confira o Local</strong><p>GPS Automático</p></div></div>
+                    <div class="step-item"><span class="step-icon">🎤</span><div class="step-text"><strong>Relate Fácil</strong><p>Fale e a IA escreve</p></div></div>
+                    <div class="step-item"><span class="step-icon">🛡️</span><div class="step-text"><strong>Envie Seguro</strong><p>Opção anônima</p></div></div>
+                </div>
+                <button onclick="goToMap()" class="btn-start">COMEÇAR AGORA</button>
+                <div class="gdf-footer">Controladoria-Geral do DF</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="map-view" class="view">
+        <div class="app-header">
+            <div class="header-text-group">
+                <div class="header-title">Nova Manifestação</div>
+                <small class="header-subtitle">👆 Arraste para ajustar</small>
+            </div>
+            <div class="header-actions">
+                <button onclick="openHistory()" class="btn-icon" aria-label="Histórico">📜</button>
+                <button onclick="backToIntro()" class="btn-icon" aria-label="Início">🏠</button>
+            </div>
+        </div>
+        <div id="map"></div>
+        <button id="btn-gps" class="btn-gps-floating" aria-label="GPS">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm8.94 3A8.994 8.994 0 0 0 13 3.06V1h-2v2.06A8.994 8.994 0 0 0 3.06 11H1v2h2.06A8.994 8.994 0 0 0 11 20.94V23h2v-2.06A8.994 8.994 0 0 0 20.94 13H23v-2h-2.06zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+        </button>
+        <div class="action-dock">
+            <p class="dock-label">Como deseja relatar?</p>
+            <div class="dock-buttons">
+                <button class="dock-btn btn-foto" onclick="openForm('foto')"><span class="dock-icon">📷</span><span>Foto</span></button>
+                <button class="dock-btn btn-video" onclick="openForm('video')"><span class="dock-icon">🎥</span><span>Vídeo</span></button>
+                <button class="dock-btn btn-audio" onclick="openForm('audio')"><span class="dock-icon">🎤</span><span>Áudio</span></button>
+            </div>
+        </div>
+    </div>
+
+    <div id="form-view" class="view modal-view">
+        <div class="modal-header"><h3>Detalhes do Relato</h3></div>
+        <div class="form-content">
+            <div id="media-area" class="media-placeholder" onclick="reTriggerMedia()">
+                <div id="media-instruction" class="placeholder-content">
+                    <span id="media-icon-display" class="media-big-icon">📷</span>
+                    <p id="media-text-display">Toque para adicionar</p>
+                </div>
+                <div id="media-preview-container"></div>
+            </div>
+            <input type="file" id="input-foto" accept="image/*" capture="environment" hidden>
+            <input type="file" id="input-video" accept="video/*" capture="environment" hidden>
+
+            <div class="card" id="card-localizacao">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                    <label style="margin:0">Onde aconteceu?</label>
+                    <div style="display:flex; align-items:center; gap:5px;">
+                        <input type="checkbox" id="check-sem-local" onchange="toggleLocalizacao()" style="width:16px; height:16px; margin:0;">
+                        <label for="check-sem-local" style="margin:0; font-size:0.75rem; color:#666; font-weight:normal;">Não se aplica</label>
+                    </div>
+                </div>
+                <div id="loc-container">
+                    <div class="address-row">
+                        <span style="color:#003399;font-size:1.2rem;">📍</span>
+                        <span id="txt-endereco" class="address-text">Carregando...</span>
+                    </div>
+                    <div class="search-row">
+                        <input type="text" id="input-busca" placeholder="Buscar local...">
+                        <button onclick="buscarLocal()" class="btn-mini-search"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button>
+                    </div>
+                </div>
+                <div id="loc-disabled-msg" style="display:none; color:#666; font-size:0.9rem; font-style:italic; padding:10px; background:#f8f9fa; border-radius:8px; text-align:center;">
+                    Relato sem localização (Ouvidoria Geral).
+                </div>
+            </div>
+
+            <div class="card">
+                <label>O que aconteceu?</label>
+                <select id="input-tipo"></select>
+
+                <div style="display:flex;justify-content:space-between;margin-top:15px;margin-bottom:5px;">
+                    <label style="margin:0">Descrição</label>
+                    <button onclick="limparTexto()" class="btn-clear-text">Limpar</button>
+                </div>
+                <textarea id="input-descricao" rows="4" placeholder="Descreva aqui..."></textarea>
+                <div id="lgpd-alert" class="lgpd-alert">🛡️ <strong>IZA Alerta:</strong> Dados pessoais detectados.</div>
+            </div>
+            
+            <div style="margin:15px 5px;display:flex;align-items:center;gap:10px;">
+                <input type="checkbox" id="check-anonimo" style="width:20px;height:20px;">
+                <label for="check-anonimo">Enviar anonimamente</label>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button onclick="closeForm()" class="btn-secondary">Voltar</button>
+            <button onclick="submitForm()" class="btn-primary highlight">ENVIAR AGORA</button>
+        </div>
+    </div>
+
+    <div id="history-view" class="view modal-view">
+        <div class="modal-header"><h3>Meus Protocolos</h3></div>
+        <div class="form-content" id="history-list"></div>
+        <div class="modal-footer">
+            <button onclick="closeHistory()" class="btn-secondary" style="width:100%">Voltar</button>
+        </div>
+    </div>
+
+    <div id="success-modal" class="success-overlay hidden">
+        <div class="success-card">
+            <div class="success-icon">✅</div>
+            <h2>Recebido!</h2>
+            <p>Protocolo:</p>
+            <div class="protocol-box" id="success-protocol">---</div>
+            <p class="success-note">Consulte em "Meus Protocolos".</p>
+            <button onclick="closeSuccess()" class="btn-primary" style="width:100%">FECHAR</button>
+        </div>
+    </div>
+
+    <div id="recording-overlay">
+        <h3>Ouvindo...</h3>
+        <div class="pulse-ring">🎤</div>
+        <p id="recording-text">Pode falar...</p>
+        <button onclick="stopRecording()" class="btn-stop">CONCLUIR</button>
+    </div>
+
+    <script src="libs/leaflet.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
