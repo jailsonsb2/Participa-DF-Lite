@@ -1,4 +1,4 @@
-# 📣 Participa DF Lite
+# 📣 Participa DF Ouvidoria
 
 > **Versão Ouro (Release Candidate 1.0.0)**
 > Uma solução de Ouvidoria Cidadã Offline-First, Acessível e Integrada.
@@ -10,9 +10,15 @@
 
 ---
 
+## Video da aplicação 
+
+https://youtu.be/kYEDRMip2zY
+
+
+
 ## 🎯 Visão Geral
 
-O **Participa DF Lite** é uma aplicação web progressiva (PWA) desenvolvida para modernizar o acesso à Ouvidoria do Governo do Distrito Federal (162). 
+O **Participa DF Ouvidoria** é uma aplicação web progressiva (PWA) desenvolvida para modernizar o acesso à Ouvidoria do Governo do Distrito Federal (162). 
 
 Focada na experiência do cidadão, a solução elimina barreiras de conectividade e complexidade, permitindo o registro de manifestações em **3 cliques**, com suporte total a funcionamento **Offline**, acessibilidade nativa e proteção de dados (LGPD).
 
@@ -70,7 +76,7 @@ Siga os passos abaixo para rodar o projeto em ambiente local.
 
 ```bash
 # Clone o repositório (ou extraia o zip)
-git clone [https://github.com/seu-usuario/participa-df-lite.git](https://github.com/seu-usuario/participa-df-lite.git)
+git clone [https://github.com/jailsonsb2/participa-df-lite.git](https://github.com/jailsonsb2/participa-df-lite.git)
 cd participa-df-lite
 
 # Crie um ambiente virtual (Recomendado)
