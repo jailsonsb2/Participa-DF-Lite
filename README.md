@@ -4,9 +4,20 @@
 > Uma solução de Ouvidoria Cidadã Offline-First, Acessível e Integrada.
 
 ![Status](https://img.shields.io/badge/Status-Conclu%C3%ADdo-success)
+![Hackathon GDF](https://img.shields.io/badge/Hackathon_CGDF-5%C2%BA_Lugar-gold)
 ![Python](https://img.shields.io/badge/Backend-FastAPI-blue)
 ![Frontend](https://img.shields.io/badge/Frontend-Vanilla%20JS-yellow)
 ![PWA](https://img.shields.io/badge/Plataforma-PWA-purple)
+
+---
+
+## 🏆 Premiação e Reconhecimento
+
+Este projeto conquistou o **5º Lugar na Categoria Ouvidoria** do 1º Hackathon em Controle Social, promovido pela Controladoria-Geral do Distrito Federal (CGDF). 
+
+A solução se destacou por cumprir rigorosos requisitos de inovação e usabilidade, trazendo funcionalidades de detecção e proteção de dados pessoais (LGPD/LAI) executadas diretamente no dispositivo do usuário.
+
+🔗 [Confira a matéria oficial com o anúncio dos ganhadores](https://www.cg.df.gov.br/w/anunciados-os-ganhadores-do-1-hackathon-em-controle-social)
 
 ---
 
